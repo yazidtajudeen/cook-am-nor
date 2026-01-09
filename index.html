@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cook AM - Your Fun Cooking Adventure!</title>
+    <meta name="description"
+        content="Master cooking with fun, interactive step-by-step tutorials. Track progress, earn badges, and become a cooking master!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <div id="app">
+        <!-- Welcome Screen -->
+        <section class="screen active" id="welcomeScreen">
+            <div class="welcome-container">
+                <div class="welcome-animation">
+                    <div class="cooking-pot">
+                        <svg viewBox="0 0 200 200" class="pot-svg">
+                            <ellipse cx="100" cy="60" rx="70" ry="15" fill="#E67E22" opacity="0.3" />
+                            <rect x="30" y="60" width="140" height="80" rx="10" fill="#E67E22" />
+                            <ellipse cx="100" cy="60" rx="70" ry="15" fill="#D35400" />
+                            <rect x="20" y="55" width="10" height="40" rx="5" fill="#8B4513" />
+                            <rect x="170" y="55" width="10" height="40" rx="5" fill="#8B4513" />
+                            <!-- Steam bubbles -->
+                            <circle class="bubble bubble-1" cx="80" cy="40" r="5" fill="#fff" opacity="0.6" />
+                            <circle class="bubble bubble-2" cx="100" cy="35" r="6" fill="#fff" opacity="0.5" />
+                            <circle class="bubble bubble-3" cx="120" cy="38" r="4" fill="#fff" opacity="0.7" />
+                        </svg>
+                    </div>
+                    <h1 class="welcome-title">
+                        <span class="title-word">Welcome</span>
+                        <span class="title-word">to</span>
+                        <span class="title-word">Cook AM!</span>
+                    </h1>
+                </div>
+
+                <p class="welcome-subtitle">Let's start your delicious cooking adventure! 🎉</p>
+
+                <div class="user-input-card">
+                    <label for="userName" class="input-label">What should we call you?</label>
+                    <input type="text" id="userName" class="text-input" placeholder="Enter your chef name..."
+                        autocomplete="off">
+                    <button class="btn-primary btn-large btn-pulse" id="continueToMoodBtn">
+                        <span>Let's Cook!</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discovery/Home Screen -->
+        <section class="screen" id="discoveryScreen">
+            <div class="screen-header">
+                <div class="logo-badge">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                    <span class="logo-text">Cook AM</span>
+                </div>
+                <div class="user-badge">
+                    <span class="user-name" id="headerUserNameDiscovery"></span>
+                    <div class="streak-indicator">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                        </svg>
+                        <span id="headerStreakDiscovery">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discovery-content">
+                <div class="discovery-hero">
+                    <h1 class="discovery-title">Discover Amazing Recipes</h1>
+                    <p class="discovery-subtitle">Search, filter, and find your next culinary adventure!</p>
+
+                    <div class="search-section">
+                        <div class="search-bar">
+                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="m21 21-4.35-4.35" />
+                            </svg>
+                            <input type="text" id="searchInput" class="search-input"
+                                placeholder="Search recipes, ingredients, or cuisines...">
+                            <button class="search-clear-btn" id="searchClearBtn" style="display: none;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M18 6L6 18M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filter-chips">
+                        <button class="filter-chip active" data-filter="all">
+                            <span>All Recipes</span>
+                        </button>
+                        <button class="filter-chip" data-filter="sweet">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                            <span>Sweet</span>
+                        </button>
+                        <button class="filter-chip" data-filter="comfort">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            </svg>
+                            <span>Comfort</span>
+                        </button>
+                        <button class="filter-chip" data-filter="quick">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
+                            <span>Quick</span>
+                        </button>
+                        <button class="filter-chip" data-filter="healthy">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                            </svg>
+                            <span>Healthy</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="recipes-container">
+                    <div class="recipes-header">
+                        <h2 class="recipes-count" id="recipesCount">4 Recipes</h2>
+                    </div>
+                    <div class="all-recipes-grid" id="allRecipesGrid"></div>
+                    <div class="no-results" id="noResults" style="display: none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
+                        </svg>
+                        <h3>No recipes found</h3>
+                        <p>Try adjusting your search or filters</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mood Selection Screen -->
+        <section class="screen" id="moodScreen">
+            <div class="screen-header">
+                <div class="logo-badge">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                    <span class="logo-text">Cook AM</span>
+                </div>
+                <div class="user-badge">
+                    <span class="user-name" id="headerUserName"></span>
+                    <div class="streak-indicator">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                        </svg>
+                        <span id="headerStreak">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mood-content">
+                <h1 class="screen-title animate-slide-in">What's your vibe today?</h1>
+                <p class="screen-subtitle">Pick a mood and we'll show you the perfect recipes!</p>
+
+                <div class="mood-grid">
+                    <button class="mood-card mood-card-interactive" data-mood="sweet">
+                        <div class="mood-icon-wrapper">
+                            <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </div>
+                        <span class="mood-label">Sweet Treats</span>
+                        <span class="mood-description">Desserts & Baked Goods</span>
+                    </button>
+
+                    <button class="mood-card mood-card-interactive" data-mood="comfort">
+                        <div class="mood-icon-wrapper">
+                            <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                        </div>
+                        <span class="mood-label">Comfort Food</span>
+                        <span class="mood-description">Warm & Cozy Meals</span>
+                    </button>
+
+                    <button class="mood-card mood-card-interactive" data-mood="quick">
+                        <div class="mood-icon-wrapper">
+                            <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
+                        </div>
+                        <span class="mood-label">Quick Bites</span>
+                        <span class="mood-description">Fast & Easy</span>
+                    </button>
+
+                    <button class="mood-card mood-card-interactive" data-mood="healthy">
+                        <div class="mood-icon-wrapper">
+                            <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                            </svg>
+                        </div>
+                        <span class="mood-label">Healthy</span>
+                        <span class="mood-description">Fresh & Nutritious</span>
+                    </button>
+                </div>
+
+                <div class="or-divider">
+                    <span>OR</span>
+                </div>
+
+                <button class="btn-secondary btn-large" id="browseAllBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <span>Browse All Recipes</span>
+                </button>
+
+                <div class="recipe-preview-section" id="recipePreviewSection" style="display: none;">
+                    <h2 class="section-title">Choose Your Recipe</h2>
+                    <div class="recipe-preview-grid" id="recipePreviewGrid"></div>
+
+                    <button class="btn-primary btn-large btn-glow" id="startCookingBtn" style="display: none;">
+                        <span>Start Cooking Adventure!</span>
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recipe Overview Screen -->
+        <section class="screen" id="overviewScreen">
+            <div class="screen-header">
+                <button class="back-btn" id="backToMoodBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <div class="logo-badge">
+                    <span class="logo-text">Recipe Overview</span>
+                </div>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="overview-content">
+                <div class="recipe-hero">
+                    <img id="overviewImage" src="" alt="" class="recipe-hero-image">
+                    <div class="recipe-hero-overlay">
+                        <h1 class="recipe-title-hero" id="overviewTitle"></h1>
+                    </div>
+                </div>
+
+                <div class="overview-details-card">
+                    <div class="recipe-stats">
+                        <div class="stat-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            <span id="overviewTime"></span>
+                        </div>
+                        <div class="stat-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                            <span id="overviewSteps"></span>
+                        </div>
+                        <div class="stat-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                            <span id="overviewDifficulty"></span>
+                        </div>
+                    </div>
+
+                    <div class="ready-section">
+                        <p class="ready-text">Ready to become a master chef?</p>
+                        <button class="btn-primary btn-large btn-glow" id="startTutorialBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polygon points="5 3 19 12 5 21 5 3" />
+                            </svg>
+                            <span>Start Tutorial Now!</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorial Step Screen -->
+        <section class="screen" id="tutorialScreen">
+            <div class="tutorial-header">
+                <button class="icon-btn" id="exitTutorialBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="tutorial-title-section">
+                    <h2 class="tutorial-recipe-name" id="tutorialRecipeName"></h2>
+                    <div class="progress-info-inline">
+                        <span class="step-indicator" id="stepIndicator"></span>
+                        <span class="progress-dot">•</span>
+                        <span class="progress-percentage" id="progressPercentage"></span>
+                    </div>
+                </div>
+                <button class="icon-btn" id="dashboardQuickBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="progress-bar-full">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="tutorial-main">
+                <div class="step-image-card">
+                    <img id="stepImage" src="" alt="" class="step-image">
+                    <div class="step-number-badge">
+                        <span id="stepNumberBadge">1</span>
+                    </div>
+                </div>
+
+                <div class="step-content-card">
+                    <h3 class="step-title" id="stepTitle"></h3>
+                    <p class="step-instruction" id="stepInstruction"></p>
+
+                    <div class="step-actions">
+                        <button class="btn-secondary" id="prevStepBtn" style="display: none;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 12H5M12 19l-7-7 7-7" />
+                            </svg>
+                            <span>Previous</span>
+                        </button>
+                        <button class="btn-primary btn-next" id="nextStepBtn">
+                            <span id="nextStepText">Next Step</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sidebar-widgets">
+                    <!-- Timer Widget -->
+                    <div class="widget-card timer-widget">
+                        <div class="widget-header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            <span>Timer</span>
+                        </div>
+                        <div class="timer-display-large" id="timerDisplay">0:00</div>
+                        <div class="timer-controls">
+                            <button class="timer-btn timer-start" id="startTimerBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polygon points="5 3 19 12 5 21 5 3" />
+                                </svg>
+                            </button>
+                            <button class="timer-btn timer-pause" id="pauseTimerBtn" style="display: none;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <rect x="6" y="4" width="4" height="16" />
+                                    <rect x="14" y="4" width="4" height="16" />
+                                </svg>
+                            </button>
+                            <button class="timer-btn timer-reset" id="resetTimerBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <polyline points="1 4 1 10 7 10" />
+                                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ingredients Widget -->
+                    <div class="widget-card ingredients-widget">
+                        <div class="widget-header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M9 11l3 3L22 4" />
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            </svg>
+                            <span>Ingredients</span>
+                        </div>
+                        <div class="ingredients-list" id="ingredientsList"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Completion Screen -->
+        <section class="screen" id="completionScreen">
+            <div class="completion-wrapper">
+                <div class="completion-animation">
+                    <div class="trophy-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="8" r="7" />
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                        </svg>
+                    </div>
+                </div>
+
+                <h1 class="completion-title">
+                    Amazing job, <span id="completionUserName"></span>! 🎉
+                </h1>
+
+                <div class="completion-recipe-card">
+                    <img id="completionImage" src="" alt="" class="completion-recipe-image">
+                    <div class="completion-recipe-info">
+                        <h2 id="completionRecipeName"></h2>
+                        <div class="completion-stats-row">
+                            <div class="completion-stat">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
+                                </svg>
+                                <span><strong id="completionSteps"></strong> steps completed</span>
+                            </div>
+                            <div class="completion-stat">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                                <span><strong id="completionTime"></strong> cooking time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-banner">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <span id="achievementText">Achievement Unlocked!</span>
+                </div>
+
+                <div class="completion-actions">
+                    <button class="btn-secondary btn-large" id="viewProgressBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
+                        </svg>
+                        <span>View Dashboard</span>
+                    </button>
+                    <button class="btn-primary btn-large btn-glow" id="cookAnotherBtn">
+                        <span>Cook Another Recipe!</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Screen -->
+        <section class="screen" id="dashboardScreen">
+            <div class="screen-header">
+                <button class="back-btn" id="backFromDashboardBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <div class="logo-badge">
+                    <span class="logo-text">Your Dashboard</span>
+                </div>
+                <div class="header-spacer"></div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="dashboard-hero">
+                    <h1 class="dashboard-title">
+                        <span id="dashboardUserName"></span>'s Kitchen
+                    </h1>
+                    <p class="dashboard-subtitle">Keep cooking and watch your skills grow!</p>
+                </div>
+
+                <div class="stats-grid-dashboard">
+                    <div class="stat-card-dashboard">
+                        <div class="stat-icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                        </div>
+                        <div class="stat-content-large">
+                            <span class="stat-number-large" id="totalRecipes">0</span>
+                            <span class="stat-label-large">Recipes Mastered</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card-dashboard stat-card-fire">
+                        <div class="stat-icon-large">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                            </svg>
+                        </div>
+                        <div class="stat-content-large">
+                            <span class="stat-number-large" id="currentStreak">0</span>
+                            <span class="stat-label-large">Day Streak</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recipe-history-section">
+                    <h2 class="section-title-dashboard">Your Cooking Journey</h2>
+                    <div class="recipe-history-grid" id="recipeHistoryList"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
