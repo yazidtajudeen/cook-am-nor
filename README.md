@@ -2,6 +2,8 @@
 
 A **beautiful, interactive, and fun** cooking tutorial application with step-by-step guidance, animations, confetti celebrations, and user progress tracking!
 
+**Live Demo:** [cook-am-nor.vercel.app](https://cook-am-nor.vercel.app)
+
 ## ✨ New Features (Enhanced Version)
 
 ### 🎨 **Visual Enhancements**
